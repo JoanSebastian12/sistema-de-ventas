@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 class Program
 {
-    // Variables globales (listas paralelas para simular base de datos sin POO)
+
     static List<string> nombres = new List<string>();
     static List<decimal> precios = new List<decimal>();
     static List<int> stocks = new List<int>();
     
-    // Estadísticas
+    
     static decimal totalVentasCaja = 0m;
     static int cantidadVentasRealizadas = 0;
-    static List<int> unidadesVendidasPorProducto = new List<int>(); // Para producto más vendido
+    static List<int> unidadesVendidasPorProducto = new List<int>(); 
 
     static void Main(string[] args)
     {
@@ -71,7 +71,7 @@ class Program
             }
         }
 
-        // Validación de nombres duplicados
+        
         bool existe = false;
         foreach (string n in nombres)
         {
@@ -88,8 +88,8 @@ class Program
             return;
         }
 
-        decimal precio = LeerDecimal("Ingrese el precio unitario ($): ", 0.01m); // Mayor a cero
-        int stock = LeerEntero("Ingrese el stock inicial (cantidad disponible): ", 0, int.MaxValue); // Mayor o igual a cero
+        decimal precio = LeerDecimal("Ingrese el precio unitario ($): ", 0.01m); 
+        int stock = LeerEntero("Ingrese el stock inicial (cantidad disponible): ", 0, int.MaxValue); 
 
         nombres.Add(nombre);
         precios.Add(precio);
@@ -126,7 +126,7 @@ class Program
             return;
         }
 
-        // Mostrar lista
+        
         for (int i = 0; i < nombres.Count; i++)
         {
             string alerta = stocks[i] < 5 ? " [ALERTA: BAJO STOCK]" : "";
@@ -161,13 +161,13 @@ class Program
         decimal totalPagar = CalcularFactura(precios[indice], cantidad, tieneDescuento, out montoIva, out montoDescuento);
         decimal subtotal = precios[indice] * cantidad;
 
-        // Actualizar datos
+        
         stocks[indice] -= cantidad;
         totalVentasCaja += totalPagar;
         cantidadVentasRealizadas++;
         unidadesVendidasPorProducto[indice] += cantidad;
 
-        // Imprimir Ticket
+        
         ImprimirEncabezado("TICKET DE VENTA");
         Console.WriteLine($" Producto:             {nombres[indice]} (x{cantidad})");
         Console.WriteLine($" Subtotal:             {subtotal:C}");
@@ -219,7 +219,7 @@ class Program
         }
     }
 
-    // --- Métodos Obligatorios ---
+    
 
     static int LeerEntero(string mensaje, int min, int max)
     {
@@ -280,11 +280,11 @@ class Program
         
         if (tieneDescuento)
         {
-            montoDescuento = subtotal * 0.10m; // 10%
+            montoDescuento = subtotal * 0.10m; 
         }
         
         decimal baseGrabable = subtotal - montoDescuento;
-        montoIva = baseGrabable * 0.19m; // 19%
+        montoIva = baseGrabable * 0.19m; 
         
         return baseGrabable + montoIva;
     }
